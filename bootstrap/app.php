@@ -46,6 +46,20 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
+
+/**
+ * --------------------------------------------------------------------------
+ * setup mongoDB
+ * --------------------------------------------------------------------------
+ * 
+ */
+
+$app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
+
+$app->withEloquent();
+/** */
+
+
 /*
 |--------------------------------------------------------------------------
 | Register Config Files
