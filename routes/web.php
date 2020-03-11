@@ -15,5 +15,6 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->post('/store', 'CarsController@store');
 $router->get('/list', 'CarsController@list');
+$router->post('/store', 'CarsController@store');
+$router->delete('/destroy/{id}', 'CarsController@destroy');

@@ -22,14 +22,20 @@ class CarsController extends Controller
     //
 
     public function list(){
+        try {
+            $data = Cars::all();
 
-        $data = Cars::all();
-
-        $data->map(function($dt) {
-            $dt->price = number_format($dt->price);
-        });
-
-        return response()->json(['success' => true, 'message' => 'Success get data.', 'data' => $data], 200);
+            if($data->count() > 0) {
+                $data->map(function($dt) {
+                    $dt->price = number_format($dt->price);
+                });
+            }
+    
+            return response()->json(['success' => true, 'message' => 'Success get data.', 'data' => $data], 200);
+        
+        } catch (\Throwable $th) {
+            return response()->json(['success' => false, 'message' => $th, 'data' => null], 500);
+        }
     }
 
     public function store(Request $request) {
@@ -54,6 +60,22 @@ class CarsController extends Controller
             
             return response()->json(['success' => true, 'message' => 'Success store data.', 'data' => null], 200);
 
+        } catch (\Throwable $th) {
+            return response()->json(['success' => false, 'message' => $th, 'data' => null], 500);
+        }
+
+    }
+
+    public function destroy($id) {
+        try {
+            
+            $data = Cars::find($id);
+
+            if(!$data->delete()) 
+                return response()->json(['success' => false, 'message' => 'Failed destroy data.', 'data' => null], 500);
+            
+            return response()->json(['success' => true, 'message' => 'Success destroy data.', 'data' => null], 200);
+        
         } catch (\Throwable $th) {
             return response()->json(['success' => false, 'message' => $th, 'data' => null], 500);
         }
