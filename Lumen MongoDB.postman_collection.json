@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "0f113ff6-511c-43b0-a47c-b9abcec40f54",
+		"name": "Lumen MongoDB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cars",
+			"item": [
+				{
+					"name": "Add Car",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"carcompany\" : \"Ferrari\",\n\t\"name\": \"Italia \",\n\t\"price\" : 6400000000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/cars/store",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"cars",
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Car",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/cars/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"cars",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Car",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/cars/destroy/5e6854ad083a000089002548",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"cars",
+								"destroy",
+								"5e6854ad083a000089002548"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Car",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"carcompany\" : \"Honda\",\n\t\"name\": \"Brio Satya\",\n\t\"price\" : 400000000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/cars/update/5e6853c9083a000089002544",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"cars",
+								"update",
+								"5e6853c9083a000089002544"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
