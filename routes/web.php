@@ -19,6 +19,7 @@ $router->group(['prefix' => 'cars'], function ($router) {
     $router->get('/list', 'CarsController@list');
     $router->post('/store', 'CarsController@store');
     $router->put('/update/{id}', 'CarsController@update');
+    $router->get('/detail/{id}', 'CarsController@detail');
     $router->delete('/destroy/{id}', 'CarsController@destroy');
 });
 

@@ -6,3 +6,11 @@ composer require jenssegers/mongodb
 https://stackoverflow.com/questions/25075616/php-startup-unable-to-load-dynamic-library-php-mongo-dll
 
 2. php.ini -> extension=php_mongo.dll
+
+
+
+php artisan swagger-lume:publish-config 
+artisan swagger-lume:publish-view
+php artisan swagger-lume:publish
+php artisan swagger-lume:generate
+https://gist.github.com/nostah/d610459d50564c729c56

@@ -137,6 +137,30 @@
                     }
                 }
             }
+        },
+        "/cars/detail/{id}": {
+            "get": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Get of Cars by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "document _id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                }
+            }
         }
     }
 }

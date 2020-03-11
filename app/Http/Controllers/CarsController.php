@@ -39,6 +39,18 @@ class CarsController extends Controller
         }
     }
 
+    
+    public function detail($id){
+        try {
+            $data = Cars::findOrFail($id);
+
+            return response()->json(['success' => true, 'message' => 'Success get data.', 'data' => $data], 200);
+        
+        } catch (\Throwable $th) {
+            return response()->json(['success' => false, 'message' => $th, 'data' => null], 500);
+        }
+    }
+
     public function store(Request $request) {
 
         try {

@@ -4,6 +4,8 @@ namespace App;
 
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
+/** Swagger Documentation API */
+
  /**
  * @OA\Get(
  *     path="/cars/list",
@@ -41,7 +43,6 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
  *     @OA\Response(response="200", description="An example resource")
  * )
  */
-
  
   /**
  * @OA\Put(
@@ -78,12 +79,27 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
  *     @OA\Response(response="200", description="An example resource")
  * )
  */
-
  
   /**
  * @OA\Delete(
  *     path="/cars/destroy/{id}",
  *     summary="Delete of Cars",
+ *     tags={"Cars"},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="document _id",
+ *         required=true,
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Response(response="200", description="An example resource")
+ * )
+ */
+
+  /**
+ * @OA\Get(
+ *     path="/cars/detail/{id}",
+ *     summary="Get of Cars by id",
  *     tags={"Cars"},
  *     @OA\Parameter(
  *         name="id",
