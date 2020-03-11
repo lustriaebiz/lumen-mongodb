@@ -66,6 +66,36 @@ class CarsController extends Controller
 
     }
 
+    public function update(Request $request, $id) {
+        try {
+            
+            $data = Cars::find($id);
+
+            /** validation data is exist */
+            if(is_null($data)) 
+                return response()->json(['success' => false, 'message' => 'Data not found.', 'data' => null], 200);
+            
+            /** request */
+            $carcompany = $request->input('carcompany');
+            $name       = $request->input('name');
+            $price      = $request->input('price');
+
+            /** set */
+            $data->carcompany    = $carcompany;
+            $data->name          = $name;
+            $data->price         = $price;    
+
+            /** execute & response */
+            if(!$data->save())
+                return response()->json(['success' => false, 'message' => 'Failed update data.', 'data' => null], 500);
+            
+            return response()->json(['success' => true, 'message' => 'Success update data.', 'data' => null], 200);
+
+        } catch (\Throwable $th) {
+            return response()->json(['success' => false, 'message' => $th, 'data' => null], 500);
+        }
+    }
+
     public function destroy($id) {
         try {
             

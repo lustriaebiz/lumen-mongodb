@@ -15,6 +15,10 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/list', 'CarsController@list');
-$router->post('/store', 'CarsController@store');
-$router->delete('/destroy/{id}', 'CarsController@destroy');
+$router->group(['prefix' => 'cars'], function ($router) {
+    $router->get('/list', 'CarsController@list');
+    $router->post('/store', 'CarsController@store');
+    $router->put('/update/{id}', 'CarsController@update');
+    $router->delete('/destroy/{id}', 'CarsController@destroy');
+});
+
