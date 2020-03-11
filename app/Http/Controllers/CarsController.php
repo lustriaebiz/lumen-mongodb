@@ -42,7 +42,12 @@ class CarsController extends Controller
     
     public function detail($id){
         try {
-            $data = Cars::findOrFail($id);
+            $data = Cars::find($id);
+
+            /** validation data is exist */
+            if(is_null($data)) 
+                return response()->json(['success' => false, 'message' => 'Data not found.', 'data' => null], 200);
+
 
             return response()->json(['success' => true, 'message' => 'Success get data.', 'data' => $data], 200);
         
