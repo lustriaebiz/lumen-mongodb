@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Validator;
 
 /** models */
 use App\Cars;
@@ -42,17 +43,26 @@ class CarsController extends Controller
 
         try {
 
+            /** validate */
+            $validator = Validator::make($request->all(), [
+                'carcompany' => 'required',
+                'name' => 'required',
+                'price' => 'required'
+            ]);
+
+            if($validator->fails()){
+                return response()->json(['success' => false, 'message' => 'Validation errors', 'data' =>  $validator->errors()], 422);
+            }
+
             /** request */
-            $carcompany = $request->input('carcompany');
-            $name       = $request->input('name');
-            $price      = $request->input('price');
+            $input  = $request->all();
 
             /** proccess */
             $car = new Cars();
 
-            $car->carcompany    = $carcompany;
-            $car->name          = $name;
-            $car->price         = $price;    
+            $car->carcompany    = $input['carcompany'];
+            $car->name          = $input['name'];
+            $car->price         = $input['price'];    
 
             /** execute & response */
             if(!$car->save())
@@ -68,22 +78,32 @@ class CarsController extends Controller
 
     public function update(Request $request, $id) {
         try {
+
+            /** validate */
+            $validator = Validator::make($request->all(), [
+                'carcompany' => 'required',
+                'name' => 'required',
+                'price' => 'required'
+            ]);
+
+            if($validator->fails()){
+                return response()->json(['success' => false, 'message' => 'Validation errors', 'data' =>  $validator->errors()], 422);
+            }
+
+            /** request */
+            $input  = $request->all();
             
+            /** get data */
             $data = Cars::find($id);
 
             /** validation data is exist */
             if(is_null($data)) 
                 return response()->json(['success' => false, 'message' => 'Data not found.', 'data' => null], 200);
-            
-            /** request */
-            $carcompany = $request->input('carcompany');
-            $name       = $request->input('name');
-            $price      = $request->input('price');
 
             /** set */
-            $data->carcompany    = $carcompany;
-            $data->name          = $name;
-            $data->price         = $price;    
+            $data->carcompany    = $input['carcompany'];
+            $data->name          = $input['name'];
+            $data->price         = $input['price'];    
 
             /** execute & response */
             if(!$data->save())
@@ -100,6 +120,11 @@ class CarsController extends Controller
         try {
             
             $data = Cars::find($id);
+            
+            /** validation data is exist */
+            if(is_null($data)) 
+                return response()->json(['success' => false, 'message' => 'Data not found.', 'data' => null], 200);
+
 
             if(!$data->delete()) 
                 return response()->json(['success' => false, 'message' => 'Failed destroy data.', 'data' => null], 500);
