@@ -16,3 +16,4 @@ $router->get('/', function () use ($router) {
 });
 
 $router->post('/store', 'CarsController@store');
+$router->get('/list', 'CarsController@list');
