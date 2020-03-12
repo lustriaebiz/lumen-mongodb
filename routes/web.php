@@ -15,7 +15,13 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix' => 'cars'], function ($router) {
+
+$router->group(['prefix' => 'jwt'], function ($router) {
+    $router->post('/token', 'UserController@encode');
+    $router->post('/decode', 'UserController@decode');
+});
+
+$router->group(['prefix' => 'cars', 'middleware' => 'jwt.auth'], function ($router) {
     $router->get('/list', 'CarsController@list');
     $router->post('/store', 'CarsController@store');
     $router->put('/update/{id}', 'CarsController@update');

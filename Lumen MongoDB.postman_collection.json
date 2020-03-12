@@ -12,10 +12,16 @@
 					"name": "Add Car",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPcmdhbml6YXRpb24iLCJzdWIiOiJzdWJqZWN0IiwiaWF0IjoxNTgzOTkxNzc3LCJleHAiOjE1ODM5OTUzNzcsInVzZXIiOiJlYml6IiwiZGVzYyI6IiJ9.0q9Slp8rz5OMix_wgX6bqd3qeNGKATThody9nFQdeGE",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"carcompany\" : \"Ferrari\",\n\t\"name\": \"Italia \",\n\t\"price\" : 6400000000\n}",
+							"raw": "{\n\t\"carcompany\" : \"aneh\",\n\t\"name\": \"Pjero Sport\",\n\t\"price\" : 2300000000\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -40,7 +46,13 @@
 					"name": "Get Car",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPcmdhbml6YXRpb24iLCJzdWIiOiJzdWJqZWN0IiwiaWF0IjoxNTgzOTkxNzc3LCJleHAiOjE1ODM5OTUzNzcsInVzZXIiOiJlYml6IiwiZGVzYyI6IiJ9.0q9Slp8rz5OMix_wgX6bqd3qeNGKATThody9nFQdeGE",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "localhost:8000/cars/list",
 							"host": [
@@ -61,7 +73,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/cars/destroy/5e6854ad083a000089002548",
+							"raw": "localhost:8000/cars/destroy/5e6854ad083a000089002548c?Authorization=Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPcmdhbml6YXRpb24iLCJzdWIiOiJzdWJqZWN0IiwiaWF0IjoxNTgzOTkxNzc3LCJleHAiOjE1ODM5OTUzNzcsInVzZXIiOiJlYml6IiwiZGVzYyI6IiJ9.0q9Slp8rz5OMix_wgX6bqd3qeNGKATThody9nFQdeGE",
 							"host": [
 								"localhost"
 							],
@@ -69,7 +81,13 @@
 							"path": [
 								"cars",
 								"destroy",
-								"5e6854ad083a000089002548"
+								"5e6854ad083a000089002548c"
+							],
+							"query": [
+								{
+									"key": "Authorization",
+									"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPcmdhbml6YXRpb24iLCJzdWIiOiJzdWJqZWN0IiwiaWF0IjoxNTgzOTkxNzc3LCJleHAiOjE1ODM5OTUzNzcsInVzZXIiOiJlYml6IiwiZGVzYyI6IiJ9.0q9Slp8rz5OMix_wgX6bqd3qeNGKATThody9nFQdeGE"
+								}
 							]
 						}
 					},
@@ -82,7 +100,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"carcompany\" : \"Honda\",\n\t\"name\": \"Brio Satya\",\n\t\"price\" : 400000000\n}",
+							"raw": "{\n\t\"carcompany\" : \"Lol\",\n\t\"name\": \"Pjero Sport\",\n\t\"price\" : 28900000000\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -90,7 +108,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/cars/update/5e6853c9083a000089002544",
+							"raw": "localhost:8000/cars/update/5e687e66e0620000e50051d2?Authorization",
 							"host": [
 								"localhost"
 							],
@@ -98,7 +116,77 @@
 							"path": [
 								"cars",
 								"update",
-								"5e6853c9083a000089002544"
+								"5e687e66e0620000e50051d2"
+							],
+							"query": [
+								{
+									"key": "Authorization",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "JWT",
+			"item": [
+				{
+					"name": "Create Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user_id\" : 2,\n\t\"email\" : \"ebislustria@gmail.com\",\n\t\"is_active\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/jwt/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"jwt",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Decode Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"token\" : \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJFYml6Iiwic3ViIjoiTHVtZW4gVG9rZW4gSldUIiwiaWF0IjoxNTgzOTkyODQwLCJleHAiOjE1ODM5OTY0NDAsInVzZXIiOnsidXNlcl9pZCI6MiwiZW1haWwiOiJlYmlzbHVzdHJpYUBnbWFpbC5jb20iLCJpc19hY3RpdmUiOnRydWV9LCJkZXNjIjoiIn0.fHCDAVz9krhIoz8_YTgyIhunjvCFibBH_wgYjDAshQI\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/jwt/decode",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"jwt",
+								"decode"
 							]
 						}
 					},
