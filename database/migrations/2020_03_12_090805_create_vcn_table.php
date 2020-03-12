@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHomeTable extends Migration
+class CreateVcnTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateHomeTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mongodb')->create('home', function (Blueprint $table) {
+        Schema::connection('mysql1')->create('vcn', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('vcn_number');
+            $table->integer('max_trx');
+            $table->integer('amount_settlement');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateHomeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('home');
+        Schema::dropIfExists('vcn');
     }
 }

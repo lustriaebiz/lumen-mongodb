@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Validator;
 
 /** models */
-use App\Cars;
+use App\Models\Cars;
 
 class CarsController extends Controller
 {

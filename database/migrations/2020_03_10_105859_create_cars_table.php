@@ -13,8 +13,8 @@ class CreateCarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cars', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::connection('mongodb')->create('cars', function (Blueprint $table) {
+            $table->integer('id');
             $table->string('carcompany');
             $table->string('name');
             $table->number('price');

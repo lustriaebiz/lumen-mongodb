@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHomeTable extends Migration
+class CreateLogTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class CreateHomeTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mongodb')->create('home', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::connection('mongodb')->create('log', function (Blueprint $table) {
+            $table->text('id');
+            $table->string('method');
+            $table->string('path');
+            $table->jsonb('headers');
+            $table->jsonb('request');
+            $table->jsonb('response');
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ class CreateHomeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('home');
+        Schema::dropIfExists('log');
     }
 }
