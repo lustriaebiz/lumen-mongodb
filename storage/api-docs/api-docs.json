@@ -1,1 +1,207 @@
-{"openapi":"3.0.0","info":{"title":"Awesome API Reference","version":"1.0.0"},"paths":{"\/cars\/list":{"get":{"tags":["Cars"],"summary":"List of Cars","responses":{"200":{"description":"OK"}},"security":[{"bearerAuth":[]}]}},"\/cars\/store":{"post":{"tags":["Cars"],"summary":"Create of Cars","requestBody":{"content":{"application\/json":{"schema":{"properties":{"carcompany":{"type":"string"},"name":{"type":"string"},"price":{"type":"number"}},"type":"object","example":{"carcompany":"Ferrari","name":"Pista","price":82100000}}}}},"responses":{"200":{"description":"An example resource"}}}},"\/cars\/update\/{id}":{"put":{"tags":["Cars"],"summary":"Update of Cars","parameters":[{"name":"id","in":"path","description":"document _id","required":true,"schema":{"type":"string"}}],"requestBody":{"content":{"application\/json":{"schema":{"properties":{"carcompany":{"type":"string"},"name":{"type":"string"},"price":{"type":"number"}},"type":"object","example":{"carcompany":"Ferrari","name":"Pista","price":82100000}}}}},"responses":{"200":{"description":"An example resource"}}}},"\/cars\/destroy\/{id}":{"delete":{"tags":["Cars"],"summary":"Delete of Cars","parameters":[{"name":"id","in":"path","description":"document _id","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"An example resource"}}}},"\/cars\/detail\/{id}":{"get":{"tags":["Cars"],"summary":"Get of Cars by id","parameters":[{"name":"id","in":"path","description":"document _id","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"An example resource"}}}}},"components":{"securitySchemes":{"bearer":{"scheme":"bearer","type":"http","bearerFormat":"JWT"}}}}
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Awesome API Reference",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/cars/list": {
+            "get": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "List of Cars",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/cars/store": {
+            "post": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Create of Cars",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "carcompany": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "carcompany": "Ferrari",
+                                    "name": "Pista",
+                                    "price": 82100000
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                }
+            }
+        },
+        "/cars/update/{id}": {
+            "put": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Update of Cars",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "document _id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "carcompany": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "carcompany": "Ferrari",
+                                    "name": "Pista",
+                                    "price": 82100000
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                }
+            }
+        },
+        "/cars/destroy/{id}": {
+            "delete": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Delete of Cars",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "document _id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                }
+            }
+        },
+        "/cars/detail/{id}": {
+            "get": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Get of Cars by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "document _id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                }
+            }
+        },
+        "/jwt/token": {
+            "post": {
+                "tags": [
+                    "JWT"
+                ],
+                "summary": "Create token",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "user_id": 2,
+                                    "email": "ebislustria@gmail.com",
+                                    "is_active": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                }
+            }
+        },
+        "/jwt/decode": {
+            "post": {
+                "tags": [
+                    "JWT"
+                ],
+                "summary": "Decode token",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJFYml6Iiwic3ViIjoiTHVtZW4gVG9rZW4gSldUIiwiaWF0IjoxNTgzOTkyODQwLCJleHAiOjE1ODM5OTY0NDAsInVzZXIiOnsidXNlcl9pZCI6MiwiZW1haWwiOiJlYmlzbHVzdHJpYUBnbWFpbC5jb20iLCJpc19hY3RpdmUiOnRydWV9LCJkZXNjIjoiIn0.fHCDAVz9krhIoz8_YTgyIhunjvCFibBH_wgYjDAshQI"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                }
+            }
+        }
+    }
+}

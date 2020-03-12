@@ -6,6 +6,41 @@ use Illuminate\Http\Request;
 use \Firebase\JWT\JWT;
 use Validator;
 
+ /**
+ * @OA\Post(
+ *     path="/jwt/token",
+ *     summary="Create token",
+ *     tags={"JWT"},
+ *     @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 example={"user_id":2,"email":"ebislustria@gmail.com","is_active":true}
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(response="200", description="An example resource")
+ * )
+ */
+
+  /**
+ * @OA\Post(
+ *     path="/jwt/decode",
+ *     summary="Decode token",
+ *     tags={"JWT"},
+ *     @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 example={"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJFYml6Iiwic3ViIjoiTHVtZW4gVG9rZW4gSldUIiwiaWF0IjoxNTgzOTkyODQwLCJleHAiOjE1ODM5OTY0NDAsInVzZXIiOnsidXNlcl9pZCI6MiwiZW1haWwiOiJlYmlzbHVzdHJpYUBnbWFpbC5jb20iLCJpc19hY3RpdmUiOnRydWV9LCJkZXNjIjoiIn0.fHCDAVz9krhIoz8_YTgyIhunjvCFibBH_wgYjDAshQI"}
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(response="200", description="An example resource")
+ * )
+ */
+ 
+
 class UserController extends Controller
 {
     
@@ -19,7 +54,7 @@ class UserController extends Controller
             'sub' => 'Lumen Token JWT', 
             'iat' => time(),
             'exp' => time() + 60*60, 
-            'user' => $input,
+            'data' => $input,
             'desc' => ''
           ];
           
