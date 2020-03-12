@@ -13,7 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $collection) {
+        Schema::connection('mongodb')->create('users', function (Blueprint $collection) {
             $collection->increments('_id');
             $collection->string('username');
             $collection->string('password');

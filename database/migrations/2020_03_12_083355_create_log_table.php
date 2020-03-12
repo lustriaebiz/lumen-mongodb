@@ -13,7 +13,7 @@ class CreateLogTable extends Migration
      */
     public function up()
     {
-        Schema::create('log', function (Blueprint $table) {
+        Schema::connection('mongodb')->create('log', function (Blueprint $table) {
             $table->text('id');
             $table->string('method');
             $table->string('path');
