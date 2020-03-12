@@ -50,21 +50,21 @@ class UserController extends Controller
         $input  = $request->all();
 
         $payload = [
-            'iss' => 'Ebiz', 
-            'sub' => 'Lumen Token JWT', 
-            'iat' => time(),
-            'exp' => time() + 60*60, 
-            'data' => $input,
-            'desc' => ''
+            'iss'   => 'Ebiz', 
+            'sub'   => 'Lumen Token JWT', 
+            'iat'   => time(),
+            'exp'   => time() + 60*60, 
+            'data'  => $input,
+            'desc'  => ''
           ];
           
           $jwt = JWT::encode($payload, env('JWT_SECRET'));
           
-          $result = true;
-          $message = 'Create Token succeed';
-          $user_data = [];
+          $success      = true;
+          $message      = 'Create Token succeed';
+          $user_data    = [];
           
-          return ['result'=>$result, 'message'=>$message, 'token'=>$jwt, 'data'=> $input];
+          return response()->json(['success'=>$success, 'message'=>$message, 'token'=>$jwt, 'data'=> $input]);
     }
 
     
@@ -84,10 +84,10 @@ class UserController extends Controller
         
         $decoded = JWT::decode($input['token'], env('JWT_SECRET'), array('HS256'));
         
-        $result = true;
-        $message = 'Decode succeed';
-        $data = $decoded;
+        $success    = true;
+        $message    = 'Decode succeed';
+        $data       = $decoded;
         
-        return ['result'=>$result, 'message'=>$message, 'data'=>$data];
+        return response()->json(['success'=>$success, 'message'=>$message, 'data'=>$data]);
     }
 }
