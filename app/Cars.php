@@ -11,7 +11,8 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
  *     path="/cars/list",
  *     summary="List of Cars",
  *     tags={"Cars"},
- *     @OA\Response(response="200", description="OK")
+ *     @OA\Response(response="200", description="OK"),
+ *     security={{ "apiAuth": {} }}
  * )
  */
 
@@ -40,7 +41,8 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
  *             )
  *         )
  *     ),
- *     @OA\Response(response="200", description="An example resource")
+ *     @OA\Response(response="200", description="An example resource"),
+ *     security={{ "apiAuth": {} }}
  * )
  */
  
@@ -76,7 +78,8 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
  *             )
  *         )
  *     ),
- *     @OA\Response(response="200", description="An example resource")
+ *     @OA\Response(response="200", description="An example resource"),
+ *     security={{ "apiAuth": {} }}
  * )
  */
  
@@ -92,7 +95,8 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
  *         required=true,
  *         @OA\Schema(type="string")
  *     ),
- *     @OA\Response(response="200", description="An example resource")
+ *     @OA\Response(response="200", description="An example resource"),
+ *     security={{ "apiAuth": {} }}
  * )
  */
 
@@ -108,7 +112,8 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
  *         required=true,
  *         @OA\Schema(type="string")
  *     ),
- *     @OA\Response(response="200", description="An example resource")
+ *     @OA\Response(response="200", description="An example resource"),
+ *     security={{ "apiAuth": {} }}
  * )
  */
 

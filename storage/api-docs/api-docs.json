@@ -15,7 +15,12 @@
                     "200": {
                         "description": "OK"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
             }
         },
         "/cars/store": {
@@ -53,7 +58,12 @@
                     "200": {
                         "description": "An example resource"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
             }
         },
         "/cars/update/{id}": {
@@ -102,7 +112,12 @@
                     "200": {
                         "description": "An example resource"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
             }
         },
         "/cars/destroy/{id}": {
@@ -126,7 +141,12 @@
                     "200": {
                         "description": "An example resource"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
             }
         },
         "/cars/detail/{id}": {
@@ -150,7 +170,12 @@
                     "200": {
                         "description": "An example resource"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
             }
         },
         "/jwt/token": {
@@ -201,6 +226,18 @@
                         "description": "An example resource"
                     }
                 }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "apiAuth": {
+                "type": "http",
+                "description": "Login with email and password to get the authentication token",
+                "name": "Token based Based",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
             }
         }
     }

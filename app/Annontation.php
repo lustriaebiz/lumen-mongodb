@@ -11,6 +11,18 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
  * @OA\Info(title="Awesome API Reference", version="1.0.0")
  */
 
+ /**
+ * @OA\SecurityScheme(
+ *     type="http",
+ *     description="Login with email and password to get the authentication token",
+ *     name="Token based Based",
+ *     in="header",
+ *     scheme="bearer",
+ *     bearerFormat="JWT",
+ *     securityScheme="apiAuth",
+ * )
+ */
+
 class Annotation extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use Authenticatable, Authorizable;

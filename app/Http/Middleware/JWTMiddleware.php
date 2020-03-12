@@ -33,7 +33,7 @@ class JWTMiddleware
             ];
         }
         
-        $request->request->add(['auth' => ['user'=>$credentials->user, 'desc'=>$credentials->desc]]);
+        $request->request->add(['auth' => ['user'=>$credentials->data, 'desc'=>$credentials->desc]]);
         return $next($request);
     }
 }
