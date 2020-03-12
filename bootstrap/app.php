@@ -58,6 +58,7 @@ $app->middleware([
 
 $app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
 
+
 $app->withEloquent();
 /** */
 
@@ -92,9 +93,10 @@ $app->configure('swagger-lume');
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
+    'jwt.auth' => App\Http\Middleware\JWTMiddleware::class,
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -112,6 +114,7 @@ $app->configure('swagger-lume');
 // $app->register(App\Providers\EventServiceProvider::class);
 
 $app->register(\SwaggerLume\ServiceProvider::class);
+$app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
