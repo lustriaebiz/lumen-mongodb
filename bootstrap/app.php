@@ -89,13 +89,15 @@ $app->configure('swagger-lume');
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+    // App\Http\Middleware\ExampleMiddleware::class,
+    App\Http\Middleware\LogMiddleware::class,
+]);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
     'jwt.auth' => App\Http\Middleware\JWTMiddleware::class,
+    // 'logger' => App\Http\Middleware\LogAfterRequest::class
 ]);
 
 /*
