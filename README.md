@@ -4,3 +4,4 @@
 
 ### - JWT
 ### - Swagger
+### - Predis
