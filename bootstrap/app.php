@@ -75,6 +75,7 @@ $app->withEloquent();
 */
 
 $app->configure('app');
+$app->configure('database');
 
 $app->configure('swagger-lume'); 
 
@@ -117,6 +118,7 @@ $app->routeMiddleware([
 
 $app->register(\SwaggerLume\ServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
+$app->register('Illuminate\Redis\RedisServiceProvider');
 
 /*
 |--------------------------------------------------------------------------

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Validator;
 
 /** models */
@@ -23,8 +24,12 @@ class CarsController extends Controller
     //
 
     public function list(){
+
         try {
-            $data = Cars::all();
+
+            $data = Cache::remember("cars_all", 10 * 60, function () {
+                return Cars::all();
+            });
 
             if($data->count() > 0) {
                 $data->map(function($dt) {
