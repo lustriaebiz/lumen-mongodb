@@ -53,7 +53,7 @@ class UserController extends Controller
             'iss'   => 'Ebiz', 
             'sub'   => 'Lumen Token JWT', 
             'iat'   => time(),
-            'exp'   => time() + 60*60, 
+            'exp'   => time() + 120*60, 
             'data'  => $input,
             'desc'  => ''
           ];
