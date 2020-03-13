@@ -7,8 +7,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\Log as Logs;
 
-class LogMiddleware {
-
+class LogMiddleware 
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
 	public function handle(Request $request, Closure  $next)
 	{
 		$response = $next($request);
