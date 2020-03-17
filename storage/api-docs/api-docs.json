@@ -5,6 +5,56 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/jwt/token": {
+            "post": {
+                "tags": [
+                    "JWT"
+                ],
+                "summary": "Create token",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "user_id": 2,
+                                    "email": "ebislustria@gmail.com",
+                                    "is_active": true
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                }
+            }
+        },
+        "/jwt/decode": {
+            "post": {
+                "tags": [
+                    "JWT"
+                ],
+                "summary": "Decode token",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "example": {
+                                    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJFYml6Iiwic3ViIjoiTHVtZW4gVG9rZW4gSldUIiwiaWF0IjoxNTgzOTkyODQwLCJleHAiOjE1ODM5OTY0NDAsInVzZXIiOnsidXNlcl9pZCI6MiwiZW1haWwiOiJlYmlzbHVzdHJpYUBnbWFpbC5jb20iLCJpc19hY3RpdmUiOnRydWV9LCJkZXNjIjoiIn0.fHCDAVz9krhIoz8_YTgyIhunjvCFibBH_wgYjDAshQI"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                }
+            }
+        },
         "/cars/list": {
             "get": {
                 "tags": [
@@ -176,56 +226,6 @@
                         "apiAuth": []
                     }
                 ]
-            }
-        },
-        "/jwt/token": {
-            "post": {
-                "tags": [
-                    "JWT"
-                ],
-                "summary": "Create token",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "example": {
-                                    "user_id": 2,
-                                    "email": "ebislustria@gmail.com",
-                                    "is_active": true
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "An example resource"
-                    }
-                }
-            }
-        },
-        "/jwt/decode": {
-            "post": {
-                "tags": [
-                    "JWT"
-                ],
-                "summary": "Decode token",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "example": {
-                                    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJFYml6Iiwic3ViIjoiTHVtZW4gVG9rZW4gSldUIiwiaWF0IjoxNTgzOTkyODQwLCJleHAiOjE1ODM5OTY0NDAsInVzZXIiOnsidXNlcl9pZCI6MiwiZW1haWwiOiJlYmlzbHVzdHJpYUBnbWFpbC5jb20iLCJpc19hY3RpdmUiOnRydWV9LCJkZXNjIjoiIn0.fHCDAVz9krhIoz8_YTgyIhunjvCFibBH_wgYjDAshQI"
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "An example resource"
-                    }
-                }
             }
         }
     },
