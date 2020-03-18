@@ -5,19 +5,6 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/redis/get": {
-            "get": {
-                "tags": [
-                    "Redis"
-                ],
-                "summary": "Get Data",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
-        },
         "/redis/set": {
             "post": {
                 "tags": [
@@ -44,6 +31,53 @@
                                     "name": "Lustria Ebiz",
                                     "gender": "Male",
                                     "age": 24
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                }
+            }
+        },
+        "/redis/get": {
+            "get": {
+                "tags": [
+                    "Redis"
+                ],
+                "summary": "Get Data",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/redis/publish": {
+            "post": {
+                "tags": [
+                    "Redis"
+                ],
+                "summary": "Publish Data",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "channel": {
+                                        "type": "string"
+                                    },
+                                    "message": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "channel": "chanel-1022",
+                                    "message": "Hay bro"
                                 }
                             }
                         }

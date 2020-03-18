@@ -32,6 +32,7 @@ $router->group(['prefix' => 'cars', 'middleware' => 'jwt.auth'], function ($rout
 $router->group(['prefix' => 'redis'], function ($router) {
     $router->post('/set', 'RedisController@setter');
     $router->get('/get', 'RedisController@getter');
+    $router->post('/publish', 'RedisController@publish');
     $router->delete('/destroy', 'RedisController@destroy');
 });
 
