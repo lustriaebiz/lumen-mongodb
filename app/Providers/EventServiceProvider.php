@@ -16,4 +16,8 @@ class EventServiceProvider extends ServiceProvider
             \App\Listeners\ExampleListener::class,
         ],
     ];
+    
+    protected $subscribe = [
+        'App\Listeners\RedisListener',
+    ];
 }
