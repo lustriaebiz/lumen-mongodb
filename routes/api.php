@@ -29,3 +29,9 @@ $router->group(['prefix' => 'cars', 'middleware' => 'jwt.auth'], function ($rout
     $router->delete('/destroy/{id}', 'CarsController@destroy');
 });
 
+$router->group(['prefix' => 'redis'], function ($router) {
+    $router->post('/set', 'RedisController@setter');
+    $router->get('/get', 'RedisController@getter');
+    $router->delete('/destroy', 'RedisController@destroy');
+});
+

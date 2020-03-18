@@ -27,19 +27,19 @@
         ],
         'migrations' => 'migrations',
         'redis' => [
-            'cluster' => true,
+            // 'cluster' => true,
             'client' => 'predis',
             'default' => [
-              'host' => env('REDIS_HOST', '127.0.0.1'),
-              'password' => env('REDIS_PASSWORD', 'secret!@#'),
-              'port' => env('REDIS_PORT', 6379),
-              'database' => 0
+            //   'host' => env('REDIS_HOST', '127.0.0.1'),
+            //   'password' => env('REDIS_PASSWORD', null),
+            //   'port' => env('REDIS_PORT', 6379),
+            //   'database' => env('REDIS_DATABASE', 1)
             ],
-            'options' => [
-                'cluster' => 'redis',
-                'parameters' => ['
-                    password' => env('REDIS_PASSWORD', 'secret!@#')
-                ],
-            ],
+            // 'options' => [
+            //     'cluster' => 'redis',
+            //     'parameters' => ['
+            //         password' => env('REDIS_PASSWORD', 'secret!@#')
+            //     ],
+            // ],
         ],
     ];

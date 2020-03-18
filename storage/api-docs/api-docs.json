@@ -5,6 +5,70 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/redis/get": {
+            "get": {
+                "tags": [
+                    "Redis"
+                ],
+                "summary": "Get Data",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/redis/set": {
+            "post": {
+                "tags": [
+                    "Redis"
+                ],
+                "summary": "Set Data",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "gender": {
+                                        "type": "string"
+                                    },
+                                    "age": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "Lustria Ebiz",
+                                    "gender": "Male",
+                                    "age": 24
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                }
+            }
+        },
+        "/redis/destroy": {
+            "delete": {
+                "tags": [
+                    "Redis"
+                ],
+                "summary": "Delete Data",
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                }
+            }
+        },
         "/jwt/token": {
             "post": {
                 "tags": [
