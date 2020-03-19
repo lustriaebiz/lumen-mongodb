@@ -103,6 +103,24 @@
                 }
             }
         },
+        "/spatie/permission": {
+            "get": {
+                "tags": [
+                    "Spatie"
+                ],
+                "summary": "Spatie, Create Permission ",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/jwt/token": {
             "post": {
                 "tags": [

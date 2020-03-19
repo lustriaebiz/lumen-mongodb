@@ -6,6 +6,20 @@ use Illuminate\Http\Request;
 use \Firebase\JWT\JWT;
 use Validator;
 
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
+
+ /**
+ * @OA\Get(
+ *     path="/spatie/permission",
+ *     summary="Spatie, Create Permission ",
+ *     tags={"Spatie"},
+ *     @OA\Response(response="200", description="OK"),
+ *     security={{ "apiAuth": {} }}
+ * )
+ */
+
  /**
  * @OA\Post(
  *     path="/jwt/token",
@@ -43,6 +57,36 @@ use Validator;
 
 class UserController extends Controller
 {
+
+    public function permission() {
+        $role = new Role;
+        $role->name = 'reader';
+        $role->save();
+        
+        $permission = new Permission;
+        $permission->name = 'view articles';
+        $permission->save();
+
+        /** 
+         * fungsi untuk menambahkan permission
+         */
+        $role->givePermissionTo($permission);
+        $permission->assignRole($role);
+
+        /**
+         * assign multiple permission
+         */
+        // $role->syncPermissions($permissions);
+        // $permission->syncRoles($roles);
+
+        /** 
+         * fungsi untuk remove permission: 
+        */
+        // $role->revokePermissionTo($permission);
+        // $permission->removeRole($role)
+
+
+    }
     
     public function encode(Request $request) {
 
@@ -91,3 +135,7 @@ class UserController extends Controller
         return response()->json(['success'=>$success, 'message'=>$message, 'data'=>$data]);
     }
 }
+
+
+// note
+// https://docs.spatie.be/laravel-permission/v3/basic-usage/basic-usage/

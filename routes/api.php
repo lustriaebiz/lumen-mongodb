@@ -16,6 +16,11 @@ $router->get('/', function () use ($router) {
 });
 
 
+
+$router->group(['prefix' => 'spatie'], function ($router) {
+    $router->get('/permission', 'UserController@permission');
+});
+
 $router->group(['prefix' => 'jwt'], function ($router) {
     $router->post('/token', 'UserController@encode');
     $router->post('/decode', 'UserController@decode');
