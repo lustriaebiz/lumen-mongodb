@@ -109,7 +109,6 @@ $app->routeMiddleware([
 
 $app->configure('permission');
 $app->alias('cache', \Illuminate\Cache\CacheManager::class);
-$app->alias('Uuid', Webpatser\Uuid\Uuid::class);  // if you don't have this already
 $app->register(Spatie\Permission\PermissionServiceProvider::class);
 
 /*
