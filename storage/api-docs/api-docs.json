@@ -103,7 +103,7 @@
                 }
             }
         },
-        "/roles": {
+        "/roles/list": {
             "get": {
                 "tags": [
                     "Roles"
@@ -119,7 +119,9 @@
                         "apiAuth": []
                     }
                 ]
-            },
+            }
+        },
+        "/roles/create-with-permissions": {
             "post": {
                 "tags": [
                     "Roles"
@@ -130,17 +132,20 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "role_name": {
+                                    "role": {
                                         "type": "string"
                                     },
-                                    "permission_name": {
+                                    "permissions": {
                                         "type": "string"
                                     }
                                 },
                                 "type": "object",
                                 "example": {
-                                    "role_name": "writer",
-                                    "permission_name": "add_artikel"
+                                    "role": "subscriber",
+                                    "permissions": [
+                                        "view_article",
+                                        "like_article"
+                                    ]
                                 }
                             }
                         }

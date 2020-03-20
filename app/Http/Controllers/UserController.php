@@ -236,9 +236,10 @@ class UserController extends Controller
 
     public static function hasRole() {
 
-        $data['user']           = Auth::user();
-        $data['roles']          = Auth::user()->getRoleNames();
-        $data['permission']     = Auth::user()->getPermissionNames();
+        $data['user']                   = Auth::user();
+        $data['permission_via_roles']   = Auth::user()->getPermissionsViaRoles();
+        $data['roles']                  = Auth::user()->getRoleNames();
+        $data['permission']             = Auth::user()->getPermissionNames();
 
         return $data;
     }

@@ -11,7 +11,7 @@ use Spatie\Permission\Models\Permission;
 
  /**
  * @OA\Get(
- *     path="/roles",
+ *     path="/roles/list",
  *     summary="Get all roles",
  *     tags={"Roles"},
  *     @OA\Response(response="200", description="OK"),
@@ -22,7 +22,7 @@ use Spatie\Permission\Models\Permission;
 
   /**
  * @OA\Post(
- *     path="/roles",
+ *     path="/roles/create-with-permissions",
  *     summary="Create Roles & Permission",
  *     tags={"Roles"},
  *     @OA\RequestBody(
@@ -30,14 +30,14 @@ use Spatie\Permission\Models\Permission;
  *             mediaType="application/json",
  *             @OA\Schema(
  *                 @OA\Property(
- *                     property="role_name",
+ *                     property="role",
  *                     type="string"
  *                 ),
  *                 @OA\Property(
- *                     property="permission_name",
+ *                     property="permissions",
  *                     type="string"
  *                 ),
- *                 example={"role_name":"writer", "permission_name":"add_artikel"}
+ *                 example={"role":"subscriber", "permissions": {"view_article","like_article"}}
  *             )
  *         )
  *     ),
@@ -50,33 +50,24 @@ class RolesController extends Controller
 {
     
     
-    public function CreateRolePermission(Request $request) {
+    public function CreateRolePermissions(Request $request) {
 
         $role = new Role;
-        $role->name = $request->get('role_name');
+        $role->name = $request->get('role');
         $role->save();
         
-        $permission = new Permission;
-        $permission->name = $request->get('permission_name');
-        $permission->save();
+        $permissions = $request->get('permissions');
 
-        /** 
-         * fungsi untuk menambahkan permission
-         */
-        $role->givePermissionTo($permission);
+        if(is_array($permissions)) {
+            foreach ($permissions as $key => $value) {
+                $permission = new Permission;
+                $permission->name = $value;
+                $permission->save();
+            }
+        }
+
+        $role->givePermissionTo($permissions);
         $permission->assignRole($role);
-
-        /**
-         * assign multiple permission
-         */
-        // $role->syncPermissions($permissions);
-        // $permission->syncRoles($roles);
-
-        /** 
-         * fungsi untuk remove permission: 
-        */
-        // $role->revokePermissionTo($permission);
-        // $permission->removeRole($role)
 
         return response()->json(['success' => true, 'message' => 'Create role permission success.']);
 

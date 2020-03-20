@@ -23,12 +23,12 @@ class PermissionTableSeeder extends Seeder
                 'created_at' => date('Y-m-d H:i:s')
             ],
             [
-                'name' => 'delete__article',
+                'name' => 'delete_article',
                 'guard_name' =>'api',
                 'created_at' => date('Y-m-d H:i:s')
             ],
             [
-                'name' => 'view__article',
+                'name' => 'view_article',
                 'guard_name' =>'api',
                 'created_at' => date('Y-m-d H:i:s')
             ]
