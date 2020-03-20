@@ -20,7 +20,7 @@ class PermissionController extends Controller
 {
 
     public function list() {
-        $data = Permission::all()->pluck('name');
+        $data = Permission::all();
 
         return response()->json(['success' => true, 'message' => 'Get all permission success.',  'data' => $data]);
     }
