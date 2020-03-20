@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Models\RoleHasPermission;
 
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -75,7 +76,12 @@ class RolesController extends Controller
     }
 
     public function list() {
-        $data = Role::all()->pluck('name');
+        $data = Role::all();
+
+        $data->map(function($data) {
+            $data['permission'] = RoleHasPermission::join('permissions', 'permissions.id', '=', 'role_has_permissions.role_id')
+                                    ->where(['role_id' => $data['id']])->get();
+        });
 
         return response()->json(['success' => true, 'message' => 'Get all roles success.',  'data' => $data]);
     }
