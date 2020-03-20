@@ -19,12 +19,12 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'roles', 'middleware' => 'jwt.auth'], function ($router) {
     $router->post('/create-with-permissions', 'RolesController@CreateRolePermissions');
-    $router->post('/create', 'RolesController@CreateRole');
     $router->get('/list', 'RolesController@list');
 });
 
 $router->group(['prefix' => 'permission', 'middleware' => 'jwt.auth'], function ($router) {
     $router->get('/list', 'PermissionController@list');
+    $router->post('/create', 'PermissionController@store');
 });
 
 $router->group(['prefix' => 'user', 'middleware' => 'jwt.auth'], function ($router) {

@@ -23,6 +23,48 @@
                 ]
             }
         },
+        "/permission/create": {
+            "post": {
+                "tags": [
+                    "Permission"
+                ],
+                "summary": "Create Permission",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "role": {
+                                        "type": "string"
+                                    },
+                                    "permissions": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "role": "subscriber",
+                                    "permissions": [
+                                        "view_article",
+                                        "like_article"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/redis/set": {
             "post": {
                 "tags": [

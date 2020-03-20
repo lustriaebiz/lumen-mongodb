@@ -74,7 +74,6 @@ class RolesController extends Controller
 
         return response()->json(['success' => true, 'message' => 'Create role permission success.']);
 
-
     }
 
     public function list() {
