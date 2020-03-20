@@ -214,6 +214,44 @@
                 ]
             }
         },
+        "/user/revokepermission": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Rovoke permission to user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "permission": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "permission": [
+                                        "makan",
+                                        "minum"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/jwt/token": {
             "post": {
                 "tags": [
@@ -225,7 +263,7 @@
                         "application/json": {
                             "schema": {
                                 "example": {
-                                    "user_id": 2,
+                                    "user_id": 1,
                                     "email": "ebislustria@gmail.com",
                                     "is_active": true
                                 }
