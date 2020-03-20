@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use \Firebase\JWT\JWT;
 use Validator;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -17,6 +18,29 @@ use Spatie\Permission\Models\Permission;
  *     summary="User Has Role Permission",
  *     tags={"User"},
  *     @OA\Response(response="200", description="OK"),
+ *     security={{ "apiAuth": {} }}
+ * )
+ */
+
+ 
+ /**
+ * @OA\Post(
+ *     path="/user/givepermission",
+ *     summary="Give permission to user",
+ *     tags={"User"},
+ *     @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 @OA\Property(
+ *                     property="permission",
+ *                     type="string"
+ *                 ),
+ *                 example={"permission": {"makan", "minum"}}
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(response="200", description="An example resource"),
  *     security={{ "apiAuth": {} }}
  * )
  */
@@ -61,17 +85,23 @@ class UserController extends Controller
 
     public function hasRolePermission(Request $request) {
         
-        $user_id    = $request->get('auth')['user']->user_id;
-        $user       = User::find($user_id);
-
-        // $data['permission_via_roles']   = $user->getPermissionsViaRoles();
-        // $data['direct_permission']      = $user->getDirectPermissions();
+        $data = Auth::user();
         
-        $data['roles']          = $user->getRoleNames();
-        $data['permission']     = $user->getPermissionNames();
-        $data['all_permission'] = $user->getAllPermissions();
-
         return response()->json(['success' => true, 'message' => 'Get roles success.', 'data' => $data]);
+    }
+
+    public function givePermission(Request $request) {
+        // try {
+            // $user_id    = $request->get('auth')['user']->user_id;
+            // $user       = User::find($user_id);
+
+            // $user->givePermissionTo($request->get('permission'));
+
+            // return response()->json(['success' => true, 'message' => 'Give permission success.', 'data' => null]);
+        // } catch (\Throwable $th) {
+            // return response()->json(['success' => false, 'message' => 'Give permission failed.', 'data' => $th]);
+        
+        // }
     }
     
     public function encode(Request $request) {

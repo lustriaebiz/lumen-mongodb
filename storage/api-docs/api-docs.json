@@ -176,6 +176,44 @@
                 ]
             }
         },
+        "/user/givepermission": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Give permission to user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "permission": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "permission": [
+                                        "makan",
+                                        "minum"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/jwt/token": {
             "post": {
                 "tags": [
