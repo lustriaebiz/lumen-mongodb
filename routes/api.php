@@ -30,8 +30,8 @@ $router->group(['prefix' => 'permission', 'middleware' => 'jwt.auth'], function 
 $router->group(['prefix' => 'user', 'middleware' => 'jwt.auth'], function ($router) {
     $router->get('/role-permissions',  'UserController@hasRolePermissions');
 
-    $router->post('/assign-roles',  'UserController@assignRole');
-    $router->post('/remove-role',  'UserController@removeRole');
+    $router->post('/assign-role-permission',  'UserController@assignRolePermissions');
+    $router->post('/remove-role-permission',  'UserController@removeRolePermissions');
 
     $router->post('/give-permissions',  'UserController@givePermissions');
     $router->post('/revoke-permissions',  'UserController@revokePermissions');

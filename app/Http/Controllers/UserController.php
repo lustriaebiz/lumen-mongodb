@@ -25,18 +25,22 @@ use Spatie\Permission\Models\Permission;
  
  /**
  * @OA\Post(
- *     path="/user/assign-roles",
- *     summary="Assign roles to user",
+ *     path="/user/assign-role-permission",
+ *     summary="Assign role and permission to user",
  *     tags={"User"},
  *     @OA\RequestBody(
  *         @OA\MediaType(
  *             mediaType="application/json",
  *             @OA\Schema(
  *                 @OA\Property(
- *                     property="roles",
+ *                     property="role",
  *                     type="string"
  *                 ),
- *                 example={"roles": {"editor"}}
+ *                 @OA\Property(
+ *                     property="permission",
+ *                     type="string"
+ *                 ),
+ *                 example={"role": {"editor"}, "permission" : {"edit_article","view_article"}}
  *             )
  *         )
  *     ),
@@ -47,7 +51,7 @@ use Spatie\Permission\Models\Permission;
  
  /**
  * @OA\Post(
- *     path="/user/remove-role",
+ *     path="/user/remove-role-permission",
  *     summary="Rovoke permissions to user",
  *     tags={"User"},
  *     @OA\RequestBody(
@@ -55,10 +59,14 @@ use Spatie\Permission\Models\Permission;
  *             mediaType="application/json",
  *             @OA\Schema(
  *                 @OA\Property(
- *                     property="roles",
+ *                     property="role",
  *                     type="string"
  *                 ),
- *                 example={"roles": "editor"}
+ *                 @OA\Property(
+ *                     property="permission",
+ *                     type="string"
+ *                 ),
+ *                 example={"role": "editor", "permission" : {"edit_article","view_article"}}
  *             )
  *         )
  *     ),
@@ -149,11 +157,12 @@ use Spatie\Permission\Models\Permission;
 class UserController extends Controller
 {
 
-    public function assignRole(Request $request) {
+    public function assignRolePermissions(Request $request) {
 
         try {
         
-            Auth::user()->assignRole($request->get('roles'));
+            Auth::user()->assignRole($request->get('role'));
+            Auth::user()->givePermissionTo($request->get('permission'));
 
             /** up to date roles */
             $data = UserController::hasRole();
@@ -167,20 +176,21 @@ class UserController extends Controller
         }
 
     }
-    public function removeRole(Request $request) {
+    public function removeRolePermissions(Request $request) {
 
         try {
         
-            Auth::user()->removeRole($request->get('roles'));
+            Auth::user()->revokePermissionTo($request->get('permission'));
+            Auth::user()->removeRole($request->get('role'));
 
             /** up to date roles */
             $data = UserController::hasRole();
             // 
 
-            return response()->json(['success' => true, 'message' => 'Success assign role', 'data' => $data]);
+            return response()->json(['success' => true, 'message' => 'Success remove role', 'data' => $data]);
         
         } catch (\Throwable $th) {
-            return response()->json(['success' => false, 'message' => 'Failed assign role, there is no role named for guard `api`.', 'data' => $th]);
+            return response()->json(['success' => false, 'message' => 'Failed remove role, there is no role named for guard `api`.', 'data' => $th]);
         
         }
 

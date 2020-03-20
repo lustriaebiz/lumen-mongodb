@@ -199,25 +199,32 @@
                 ]
             }
         },
-        "/user/assign-roles": {
+        "/user/assign-role-permission": {
             "post": {
                 "tags": [
                     "User"
                 ],
-                "summary": "Assign roles to user",
+                "summary": "Assign role and permission to user",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "roles": {
+                                    "role": {
+                                        "type": "string"
+                                    },
+                                    "permission": {
                                         "type": "string"
                                     }
                                 },
                                 "type": "object",
                                 "example": {
-                                    "roles": [
+                                    "role": [
                                         "editor"
+                                    ],
+                                    "permission": [
+                                        "edit_article",
+                                        "view_article"
                                     ]
                                 }
                             }
@@ -236,7 +243,7 @@
                 ]
             }
         },
-        "/user/remove-role": {
+        "/user/remove-role-permission": {
             "post": {
                 "tags": [
                     "User"
@@ -247,13 +254,20 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "roles": {
+                                    "role": {
+                                        "type": "string"
+                                    },
+                                    "permission": {
                                         "type": "string"
                                     }
                                 },
                                 "type": "object",
                                 "example": {
-                                    "roles": "editor"
+                                    "role": "editor",
+                                    "permission": [
+                                        "edit_article",
+                                        "view_article"
+                                    ]
                                 }
                             }
                         }
