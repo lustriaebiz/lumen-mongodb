@@ -120,10 +120,17 @@ class UserController extends Controller
 
     public function GetRolePermission(Request $request) {
         
-        $user_id        = $request->get('auth')['user']->user_id;
-        $roles['roles'] = User::find($user_id)->getRoleNames();
+        $user_id    = $request->get('auth')['user']->user_id;
+        $user       = User::find($user_id);
 
-        return response()->json(['success' => true, 'message' => 'Get roles success.', 'data' => $roles]);
+        // $data['permission_via_roles']   = $user->getPermissionsViaRoles();
+        // $data['direct_permission']      = $user->getDirectPermissions();
+        
+        $data['roles']          = $user->getRoleNames();
+        $data['permission']     = $user->getPermissionNames();
+        $data['all_permission'] = $user->getAllPermissions();
+
+        return response()->json(['success' => true, 'message' => 'Get roles success.', 'data' => $data]);
     }
     
     public function encode(Request $request) {
