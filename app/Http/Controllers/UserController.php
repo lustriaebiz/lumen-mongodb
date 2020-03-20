@@ -13,8 +13,8 @@ use Spatie\Permission\Models\Permission;
 
  /**
  * @OA\Get(
- *     path="/user/roles",
- *     summary="User Has Role",
+ *     path="/user/rolepermission",
+ *     summary="User Has Role Permission",
  *     tags={"User"},
  *     @OA\Response(response="200", description="OK"),
  *     security={{ "apiAuth": {} }}
@@ -59,7 +59,7 @@ use Spatie\Permission\Models\Permission;
 class UserController extends Controller
 {
 
-    public function hasRoles(Request $request) {
+    public function hasRolePermission(Request $request) {
         
         $user_id    = $request->get('auth')['user']->user_id;
         $user       = User::find($user_id);

@@ -24,7 +24,7 @@ $router->group(['prefix' => 'roles', 'middleware' => 'jwt.auth'], function ($rou
 
 
 $router->group(['prefix' => 'user', 'middleware' => 'jwt.auth'], function ($router) {
-    $router->get('/roles',  'UserController@hasRoles');
+    $router->get('/rolepermission',  'UserController@hasRolePermission');
 });
 
 $router->group(['prefix' => 'jwt'], function ($router) {

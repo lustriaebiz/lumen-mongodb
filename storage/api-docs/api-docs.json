@@ -158,12 +158,12 @@
                 ]
             }
         },
-        "/user/roles": {
+        "/user/rolepermission": {
             "get": {
                 "tags": [
                     "User"
                 ],
-                "summary": "User Has Role",
+                "summary": "User Has Role Permission",
                 "responses": {
                     "200": {
                         "description": "OK"
