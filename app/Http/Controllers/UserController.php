@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \Firebase\JWT\JWT;
 use Validator;
+use App\User;
 
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -13,10 +14,35 @@ use Spatie\Permission\Models\Permission;
  /**
  * @OA\Get(
  *     path="/spatie/permission",
- *     summary="Spatie, Create Permission ",
+ *     summary="Get Permission ",
  *     tags={"Spatie"},
  *     @OA\Response(response="200", description="OK"),
  *     security={{ "apiAuth": {} }}
+ * )
+ */
+
+  /**
+ * @OA\Post(
+ *     path="/spatie/permission",
+ *     summary="Create Roles & Permission",
+ *     tags={"Spatie"},
+ *     @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 @OA\Property(
+ *                     property="role_name",
+ *                     type="string"
+ *                 ),
+ *                 @OA\Property(
+ *                     property="permission_name",
+ *                     type="string"
+ *                 ),
+ *                 example={"role_name":"writer", "permission_name":"add_artikel"}
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(response="200", description="An example resource")
  * )
  */
 
@@ -53,18 +79,19 @@ use Spatie\Permission\Models\Permission;
  *     @OA\Response(response="200", description="An example resource")
  * )
  */
- 
 
+    
 class UserController extends Controller
 {
 
-    public function permission() {
+    public function CreateRolePermission(Request $request) {
+
         $role = new Role;
-        $role->name = 'reader';
+        $role->name = $request->get('role_name');
         $role->save();
         
         $permission = new Permission;
-        $permission->name = 'view articles';
+        $permission->name = $request->get('permission_name');
         $permission->save();
 
         /** 
@@ -85,7 +112,16 @@ class UserController extends Controller
         // $role->revokePermissionTo($permission);
         // $permission->removeRole($role)
 
+        return response()->json(['success' => true, 'message' => 'Create role permission success.']);
 
+
+    }
+
+    public function GetRolePermission() {
+        $user = User::find(1);
+        $roles = $user->getRoleNames();
+
+        var_dump($roles);
     }
     
     public function encode(Request $request) {

@@ -108,7 +108,7 @@
                 "tags": [
                     "Spatie"
                 ],
-                "summary": "Spatie, Create Permission ",
+                "summary": "Get Permission ",
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -119,6 +119,38 @@
                         "apiAuth": []
                     }
                 ]
+            },
+            "post": {
+                "tags": [
+                    "Spatie"
+                ],
+                "summary": "Create Roles & Permission",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "role_name": {
+                                        "type": "string"
+                                    },
+                                    "permission_name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "role_name": "writer",
+                                    "permission_name": "add_artikel"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                }
             }
         },
         "/jwt/token": {

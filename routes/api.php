@@ -18,7 +18,8 @@ $router->get('/', function () use ($router) {
 
 
 $router->group(['prefix' => 'spatie'], function ($router) {
-    $router->get('/permission', 'UserController@permission');
+    $router->get('/permission', 'UserController@GetRolePermission');
+    $router->post('/permission', 'UserController@CreateRolePermission');
 });
 
 $router->group(['prefix' => 'jwt'], function ($router) {
