@@ -1,6 +1,6 @@
 <?php
     return [
-        'default' => 'mongodb',
+        'default' => 'mysql1',
         'connections' => [
             'mongodb' => [ 
                 'driver' => 'mongodb',

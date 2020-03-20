@@ -11,7 +11,7 @@ class JWTMiddleware
     public function handle($request, Closure $next, $guard = null)
     {
         $token = $request->bearerToken();
-        
+
         if(!$token) {
             // Unauthorized response if token not there
             return [
@@ -34,6 +34,8 @@ class JWTMiddleware
         }
         
         $request->request->add(['auth' => ['user'=>$credentials->data, 'desc'=>$credentials->desc]]);
+
+        // echo json_encode($request->get('auth')); die();
         return $next($request);
     }
 }

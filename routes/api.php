@@ -16,6 +16,12 @@ $router->get('/', function () use ($router) {
 });
 
 
+
+$router->group(['prefix' => 'spatie', 'middleware' => 'jwt.auth'], function ($router) {
+    $router->get('/roles',  'UserController@GetRolePermission');
+    $router->post('/roles', 'UserController@CreateRolePermission');
+});
+
 $router->group(['prefix' => 'jwt'], function ($router) {
     $router->post('/token', 'UserController@encode');
     $router->post('/decode', 'UserController@decode');

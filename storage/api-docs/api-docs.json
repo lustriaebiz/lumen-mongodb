@@ -103,6 +103,61 @@
                 }
             }
         },
+        "/spatie/roles": {
+            "get": {
+                "tags": [
+                    "Spatie"
+                ],
+                "summary": "Get Role & Permission By Token ",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Spatie"
+                ],
+                "summary": "Create Roles & Permission",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "role_name": {
+                                        "type": "string"
+                                    },
+                                    "permission_name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "role_name": "writer",
+                                    "permission_name": "add_artikel"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/jwt/token": {
             "post": {
                 "tags": [

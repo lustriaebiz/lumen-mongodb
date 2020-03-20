@@ -5,6 +5,47 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \Firebase\JWT\JWT;
 use Validator;
+use App\User;
+
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
+
+ /**
+ * @OA\Get(
+ *     path="/spatie/roles",
+ *     summary="Get Role & Permission By Token ",
+ *     tags={"Spatie"},
+ *     @OA\Response(response="200", description="OK"),
+ *     security={{ "apiAuth": {} }}
+ * )
+ */
+
+  /**
+ * @OA\Post(
+ *     path="/spatie/roles",
+ *     summary="Create Roles & Permission",
+ *     tags={"Spatie"},
+ *     @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 @OA\Property(
+ *                     property="role_name",
+ *                     type="string"
+ *                 ),
+ *                 @OA\Property(
+ *                     property="permission_name",
+ *                     type="string"
+ *                 ),
+ *                 example={"role_name":"writer", "permission_name":"add_artikel"}
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(response="200", description="An example resource"),
+ *     security={{ "apiAuth": {} }}
+ * )
+ */
 
  /**
  * @OA\Post(
@@ -39,10 +80,58 @@ use Validator;
  *     @OA\Response(response="200", description="An example resource")
  * )
  */
- 
 
+    
 class UserController extends Controller
 {
+
+    public function CreateRolePermission(Request $request) {
+
+        $role = new Role;
+        $role->name = $request->get('role_name');
+        $role->save();
+        
+        $permission = new Permission;
+        $permission->name = $request->get('permission_name');
+        $permission->save();
+
+        /** 
+         * fungsi untuk menambahkan permission
+         */
+        $role->givePermissionTo($permission);
+        $permission->assignRole($role);
+
+        /**
+         * assign multiple permission
+         */
+        // $role->syncPermissions($permissions);
+        // $permission->syncRoles($roles);
+
+        /** 
+         * fungsi untuk remove permission: 
+        */
+        // $role->revokePermissionTo($permission);
+        // $permission->removeRole($role)
+
+        return response()->json(['success' => true, 'message' => 'Create role permission success.']);
+
+
+    }
+
+    public function GetRolePermission(Request $request) {
+        
+        $user_id    = $request->get('auth')['user']->user_id;
+        $user       = User::find($user_id);
+
+        // $data['permission_via_roles']   = $user->getPermissionsViaRoles();
+        // $data['direct_permission']      = $user->getDirectPermissions();
+        
+        $data['roles']          = $user->getRoleNames();
+        $data['permission']     = $user->getPermissionNames();
+        $data['all_permission'] = $user->getAllPermissions();
+
+        return response()->json(['success' => true, 'message' => 'Get roles success.', 'data' => $data]);
+    }
     
     public function encode(Request $request) {
 
@@ -91,3 +180,7 @@ class UserController extends Controller
         return response()->json(['success'=>$success, 'message'=>$message, 'data'=>$data]);
     }
 }
+
+
+// note
+// https://docs.spatie.be/laravel-permission/v3/basic-usage/basic-usage/
