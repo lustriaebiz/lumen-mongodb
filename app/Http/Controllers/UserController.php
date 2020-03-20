@@ -14,7 +14,7 @@ use Spatie\Permission\Models\Permission;
 
  /**
  * @OA\Get(
- *     path="/user/rolepermission",
+ *     path="/user/role-permission",
  *     summary="User Has Role Permission",
  *     tags={"User"},
  *     @OA\Response(response="200", description="OK"),
@@ -25,7 +25,7 @@ use Spatie\Permission\Models\Permission;
  
  /**
  * @OA\Post(
- *     path="/user/givepermission",
+ *     path="/user/give-permission",
  *     summary="Give permission to user",
  *     tags={"User"},
  *     @OA\RequestBody(
@@ -47,7 +47,7 @@ use Spatie\Permission\Models\Permission;
  
  /**
  * @OA\Post(
- *     path="/user/revokepermission",
+ *     path="/user/revoke-permission",
  *     summary="Rovoke permission to user",
  *     tags={"User"},
  *     @OA\RequestBody(

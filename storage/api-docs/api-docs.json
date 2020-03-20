@@ -158,7 +158,7 @@
                 ]
             }
         },
-        "/user/rolepermission": {
+        "/user/role-permission": {
             "get": {
                 "tags": [
                     "User"
@@ -176,7 +176,7 @@
                 ]
             }
         },
-        "/user/givepermission": {
+        "/user/give-permission": {
             "post": {
                 "tags": [
                     "User"
@@ -214,7 +214,7 @@
                 ]
             }
         },
-        "/user/revokepermission": {
+        "/user/revoke-permission": {
             "post": {
                 "tags": [
                     "User"
