@@ -19,6 +19,7 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'roles', 'middleware' => 'jwt.auth'], function ($router) {
     $router->post('/', 'RolesController@CreateRolePermission');
+    $router->get('/', 'RolesController@list');
 });
 
 

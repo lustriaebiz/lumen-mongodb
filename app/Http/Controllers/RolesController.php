@@ -9,6 +9,17 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 
+ /**
+ * @OA\Get(
+ *     path="/roles",
+ *     summary="Get all roles",
+ *     tags={"Roles"},
+ *     @OA\Response(response="200", description="OK"),
+ *     security={{ "apiAuth": {} }}
+ * )
+ */
+
+
   /**
  * @OA\Post(
  *     path="/roles",
@@ -70,5 +81,11 @@ class RolesController extends Controller
         return response()->json(['success' => true, 'message' => 'Create role permission success.']);
 
 
+    }
+
+    public function list() {
+        $data = Role::all()->pluck('name');
+
+        return response()->json(['success' => true, 'message' => 'Get all roles success.',  'data' => $data]);
     }
 }
