@@ -59,16 +59,18 @@ class RolesController extends Controller
         
         $permissions = $request->get('permissions');
 
-        if(is_array($permissions)) {
+        if(is_array($permissions) && count($permissions) > 0) {
+
             foreach ($permissions as $key => $value) {
                 $permission = new Permission;
                 $permission->name = $value;
                 $permission->save();
             }
+
+            $role->givePermissionTo($permissions);
+            $permission->assignRole($role);
         }
 
-        $role->givePermissionTo($permissions);
-        $permission->assignRole($role);
 
         return response()->json(['success' => true, 'message' => 'Create role permission success.']);
 
