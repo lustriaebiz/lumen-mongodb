@@ -101,6 +101,9 @@ $app->routeMiddleware([
     'jwt.auth' => App\Http\Middleware\JWTMiddleware::class,
     'permission' => Spatie\Permission\Middlewares\PermissionMiddleware::class,
     'role'       => Spatie\Permission\Middlewares\RoleMiddleware::class,
+    'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+    'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+    'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
     // 'logger' => App\Http\Middleware\LogAfterRequest::class
 ]);
 

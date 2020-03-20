@@ -251,6 +251,8 @@ class UserController extends Controller
         $data['roles']                  = Auth::user()->getRoleNames();
         $data['permission']             = Auth::user()->getPermissionNames();
 
+        unset($data['permission_via_roles']);
+
         return $data;
     }
     
