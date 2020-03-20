@@ -91,17 +91,27 @@ class UserController extends Controller
     }
 
     public function givePermission(Request $request) {
-        // try {
-            // $user_id    = $request->get('auth')['user']->user_id;
-            // $user       = User::find($user_id);
 
-            // $user->givePermissionTo($request->get('permission'));
+        try {
+            $user_id    = Auth::user()['user']->id;
+            $user       = User::find($user_id);
 
-            // return response()->json(['success' => true, 'message' => 'Give permission success.', 'data' => null]);
-        // } catch (\Throwable $th) {
-            // return response()->json(['success' => false, 'message' => 'Give permission failed.', 'data' => $th]);
+            $user->givePermissionTo($request->get('permission'));
+
+            /** up to date roles */
+            $user                   = User::where('id', $user_id)->first();
+            $data['user']           = $user;
+            $data['roles']          = $user->getRoleNames();
+            $data['permission']     = $user->getPermissionNames();
+            // 
+
+            return response()->json(['success' => true, 'message' => 'Success give permission', 'data' => $data]);
         
-        // }
+        } catch (\Throwable $th) {
+            return response()->json(['success' => false, 'message' => 'Failed give permission, there is no permission named for guard `api`.', 'data' => $th]);
+        
+        }
+
     }
     
     public function encode(Request $request) {
