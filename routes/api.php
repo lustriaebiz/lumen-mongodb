@@ -16,6 +16,8 @@ $router->get('/', function () use ($router) {
 });
 
 
+$router->get('/ebiz', 'EbizController@index');
+$router->get('/ebiz/create', 'EbizController@create');
 
 $router->group(['prefix' => 'roles', 'middleware' => ['jwt.auth', 'role:super-admin']], function ($router) {
     $router->post('/create-with-permissions', 'RolesController@CreateRolePermissions');
