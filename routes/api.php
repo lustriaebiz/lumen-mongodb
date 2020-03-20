@@ -17,9 +17,9 @@ $router->get('/', function () use ($router) {
 
 
 
-$router->group(['prefix' => 'spatie'], function ($router) {
-    $router->get('/permission', 'UserController@GetRolePermission');
-    $router->post('/permission', 'UserController@CreateRolePermission');
+$router->group(['prefix' => 'spatie', 'middleware' => 'jwt.auth'], function ($router) {
+    $router->get('/roles',  'UserController@GetRolePermission');
+    $router->post('/roles', 'UserController@CreateRolePermission');
 });
 
 $router->group(['prefix' => 'jwt'], function ($router) {

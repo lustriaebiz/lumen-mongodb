@@ -103,12 +103,12 @@
                 }
             }
         },
-        "/spatie/permission": {
+        "/spatie/roles": {
             "get": {
                 "tags": [
                     "Spatie"
                 ],
-                "summary": "Get Permission ",
+                "summary": "Get Role & Permission By Token ",
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -150,7 +150,12 @@
                     "200": {
                         "description": "An example resource"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
             }
         },
         "/jwt/token": {

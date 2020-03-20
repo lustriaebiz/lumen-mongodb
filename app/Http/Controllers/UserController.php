@@ -13,8 +13,8 @@ use Spatie\Permission\Models\Permission;
 
  /**
  * @OA\Get(
- *     path="/spatie/permission",
- *     summary="Get Permission ",
+ *     path="/spatie/roles",
+ *     summary="Get Role & Permission By Token ",
  *     tags={"Spatie"},
  *     @OA\Response(response="200", description="OK"),
  *     security={{ "apiAuth": {} }}
@@ -23,7 +23,7 @@ use Spatie\Permission\Models\Permission;
 
   /**
  * @OA\Post(
- *     path="/spatie/permission",
+ *     path="/spatie/roles",
  *     summary="Create Roles & Permission",
  *     tags={"Spatie"},
  *     @OA\RequestBody(
@@ -42,7 +42,8 @@ use Spatie\Permission\Models\Permission;
  *             )
  *         )
  *     ),
- *     @OA\Response(response="200", description="An example resource")
+ *     @OA\Response(response="200", description="An example resource"),
+ *     security={{ "apiAuth": {} }}
  * )
  */
 
@@ -117,11 +118,12 @@ class UserController extends Controller
 
     }
 
-    public function GetRolePermission() {
-        $user = User::find(1);
-        $roles = $user->getRoleNames();
+    public function GetRolePermission(Request $request) {
+        
+        $user_id        = $request->get('auth')['user']->user_id;
+        $roles['roles'] = User::find($user_id)->getRoleNames();
 
-        var_dump($roles);
+        return response()->json(['success' => true, 'message' => 'Get roles success.', 'data' => $roles]);
     }
     
     public function encode(Request $request) {
