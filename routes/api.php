@@ -23,6 +23,9 @@ $router->group(['prefix' => 'roles', 'middleware' => 'jwt.auth'], function ($rou
     $router->get('/list', 'RolesController@list');
 });
 
+$router->group(['prefix' => 'permission', 'middleware' => 'jwt.auth'], function ($router) {
+    $router->get('/list', 'PermissionController@list');
+});
 
 $router->group(['prefix' => 'user', 'middleware' => 'jwt.auth'], function ($router) {
     $router->get('/role-permissions',  'UserController@hasRolePermissions');

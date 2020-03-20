@@ -5,6 +5,24 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/permission/list": {
+            "get": {
+                "tags": [
+                    "Permission"
+                ],
+                "summary": "Get all permission",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
         "/redis/set": {
             "post": {
                 "tags": [
