@@ -13,16 +13,19 @@ class RolesTableSeeder extends Seeder
     {
         DB::connection('mysql1')->table('roles')->insert([
             [
+                'id' => 1,
                 'name' => 'admin',
                 'guard_name' =>'api',
                 'created_at' => date('Y-m-d H:i:s')
             ],
             [
+                'id' => 2,
                 'name' => 'editor',
                 'guard_name' =>'api',
                 'created_at' => date('Y-m-d H:i:s')
             ],
             [
+                'id' => 3,
                 'name' => 'author',
                 'guard_name' =>'api',
                 'created_at' => date('Y-m-d H:i:s')
