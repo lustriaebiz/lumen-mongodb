@@ -103,26 +103,10 @@
                 }
             }
         },
-        "/spatie/roles": {
-            "get": {
-                "tags": [
-                    "Spatie"
-                ],
-                "summary": "Get Role & Permission By Token ",
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                },
-                "security": [
-                    {
-                        "apiAuth": []
-                    }
-                ]
-            },
+        "/roles": {
             "post": {
                 "tags": [
-                    "Spatie"
+                    "Roles"
                 ],
                 "summary": "Create Roles & Permission",
                 "requestBody": {
@@ -149,6 +133,24 @@
                 "responses": {
                     "200": {
                         "description": "An example resource"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/user/roles": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "User Has Role",
+                "responses": {
+                    "200": {
+                        "description": "OK"
                     }
                 },
                 "security": [

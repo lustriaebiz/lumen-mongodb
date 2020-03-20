@@ -6,4 +6,5 @@
 
 ### - JWT
 ### - Swagger
-### - Predis
+### - Redis
+### - Spatie
