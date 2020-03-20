@@ -36,13 +36,7 @@ class AuthServiceProvider extends ServiceProvider
 
             if($token) {
                 $user_id    = $request->get('auth')['user']->user_id;
-                $user       = User::find($user_id);
-
-                $data['user']           = $user;
-                $data['roles']          = $user->getRoleNames();
-                $data['permission']     = $user->getPermissionNames();
-
-                return $data;
+                return User::where(['id' => $user_id])->first();
             }
         });
     }

@@ -158,12 +158,12 @@
                 ]
             }
         },
-        "/user/role-permission": {
+        "/user/role-permissions": {
             "get": {
                 "tags": [
                     "User"
                 ],
-                "summary": "User Has Role Permission",
+                "summary": "User Has Role Permissions",
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -176,26 +176,25 @@
                 ]
             }
         },
-        "/user/give-permission": {
+        "/user/assign-roles": {
             "post": {
                 "tags": [
                     "User"
                 ],
-                "summary": "Give permission to user",
+                "summary": "Assign roles to user",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "permission": {
+                                    "roles": {
                                         "type": "string"
                                     }
                                 },
                                 "type": "object",
                                 "example": {
-                                    "permission": [
-                                        "makan",
-                                        "minum"
+                                    "roles": [
+                                        "editor"
                                     ]
                                 }
                             }
@@ -214,12 +213,47 @@
                 ]
             }
         },
-        "/user/revoke-permission": {
+        "/user/remove-role": {
             "post": {
                 "tags": [
                     "User"
                 ],
-                "summary": "Rovoke permission to user",
+                "summary": "Rovoke permissions to user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "roles": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "roles": "editor"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/user/give-permissions": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Give permissions to user",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -232,8 +266,46 @@
                                 "type": "object",
                                 "example": {
                                     "permission": [
-                                        "makan",
-                                        "minum"
+                                        "edit_article",
+                                        "view__article"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "An example resource"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/user/revoke-permissions": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Rovoke permissions to user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "permission": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "permission": [
+                                        "edit_article",
+                                        "view__article"
                                     ]
                                 }
                             }

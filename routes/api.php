@@ -24,9 +24,13 @@ $router->group(['prefix' => 'roles', 'middleware' => 'jwt.auth'], function ($rou
 
 
 $router->group(['prefix' => 'user', 'middleware' => 'jwt.auth'], function ($router) {
-    $router->get('/role-permission',  'UserController@hasRolePermission');
-    $router->post('/give-permission',  'UserController@givePermission');
-    $router->post('/revoke-permission',  'UserController@revokePermission');
+    $router->get('/role-permissions',  'UserController@hasRolePermissions');
+    
+    $router->post('/assign-roles',  'UserController@assignRole');
+    $router->post('/remove-role',  'UserController@removeRole');
+
+    $router->post('/give-permissions',  'UserController@givePermissions');
+    $router->post('/revoke-permissions',  'UserController@revokePermissions');
 });
 
 $router->group(['prefix' => 'jwt'], function ($router) {

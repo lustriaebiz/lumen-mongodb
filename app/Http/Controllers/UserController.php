@@ -14,8 +14,8 @@ use Spatie\Permission\Models\Permission;
 
  /**
  * @OA\Get(
- *     path="/user/role-permission",
- *     summary="User Has Role Permission",
+ *     path="/user/role-permissions",
+ *     summary="User Has Role Permissions",
  *     tags={"User"},
  *     @OA\Response(response="200", description="OK"),
  *     security={{ "apiAuth": {} }}
@@ -25,18 +25,18 @@ use Spatie\Permission\Models\Permission;
  
  /**
  * @OA\Post(
- *     path="/user/give-permission",
- *     summary="Give permission to user",
+ *     path="/user/assign-roles",
+ *     summary="Assign roles to user",
  *     tags={"User"},
  *     @OA\RequestBody(
  *         @OA\MediaType(
  *             mediaType="application/json",
  *             @OA\Schema(
  *                 @OA\Property(
- *                     property="permission",
+ *                     property="roles",
  *                     type="string"
  *                 ),
- *                 example={"permission": {"makan", "minum"}}
+ *                 example={"roles": {"editor"}}
  *             )
  *         )
  *     ),
@@ -47,8 +47,30 @@ use Spatie\Permission\Models\Permission;
  
  /**
  * @OA\Post(
- *     path="/user/revoke-permission",
- *     summary="Rovoke permission to user",
+ *     path="/user/remove-role",
+ *     summary="Rovoke permissions to user",
+ *     tags={"User"},
+ *     @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 @OA\Property(
+ *                     property="roles",
+ *                     type="string"
+ *                 ),
+ *                 example={"roles": "editor"}
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(response="200", description="An example resource"),
+ *     security={{ "apiAuth": {} }}
+ * )
+ */
+ 
+ /**
+ * @OA\Post(
+ *     path="/user/give-permissions",
+ *     summary="Give permissions to user",
  *     tags={"User"},
  *     @OA\RequestBody(
  *         @OA\MediaType(
@@ -58,7 +80,29 @@ use Spatie\Permission\Models\Permission;
  *                     property="permission",
  *                     type="string"
  *                 ),
- *                 example={"permission": {"makan", "minum"}}
+ *                 example={"permission": {"edit_article", "view__article"}}
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(response="200", description="An example resource"),
+ *     security={{ "apiAuth": {} }}
+ * )
+ */
+ 
+ /**
+ * @OA\Post(
+ *     path="/user/revoke-permissions",
+ *     summary="Rovoke permissions to user",
+ *     tags={"User"},
+ *     @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 @OA\Property(
+ *                     property="permission",
+ *                     type="string"
+ *                 ),
+ *                 example={"permission": {"edit_article", "view__article"}}
  *             )
  *         )
  *     ),
@@ -105,23 +149,61 @@ use Spatie\Permission\Models\Permission;
 class UserController extends Controller
 {
 
-    public function hasRolePermission(Request $request) {
+    public function assignRole(Request $request) {
+
+        try {
         
-        $data = Auth::user();
+            Auth::user()->assignRole($request->get('roles'));
+
+            /** up to date roles */
+            $data = UserController::hasRole();
+            // 
+
+            return response()->json(['success' => true, 'message' => 'Success assign role', 'data' => $data]);
         
+        } catch (\Throwable $th) {
+            return response()->json(['success' => false, 'message' => 'Failed assign role, there is no role named for guard `api`.', 'data' => $th]);
+        
+        }
+
+    }
+    public function removeRole(Request $request) {
+
+        try {
+        
+            Auth::user()->removeRole($request->get('roles'));
+
+            /** up to date roles */
+            $data = UserController::hasRole();
+            // 
+
+            return response()->json(['success' => true, 'message' => 'Success assign role', 'data' => $data]);
+        
+        } catch (\Throwable $th) {
+            return response()->json(['success' => false, 'message' => 'Failed assign role, there is no role named for guard `api`.', 'data' => $th]);
+        
+        }
+
+    }
+
+    public function hasRolePermissions(Request $request) {
+        
+        $user_id = Auth::user()->id;
+        
+        /** up to date roles */
+        $data = UserController::hasRole();
+
         return response()->json(['success' => true, 'message' => 'Get roles success.', 'data' => $data]);
     }
 
-    public function givePermission(Request $request) {
+    public function givePermissions(Request $request) {
 
         try {
-            $user_id    = Auth::user()['user']->id;
-            $user       = User::find($user_id);
 
-            $user->givePermissionTo($request->get('permission'));
+            Auth::user()->givePermissionTo($request->get('permission'));
 
             /** up to date roles */
-            $data = UserController::userHasRole();
+            $data = UserController::hasRole();
             // 
 
             return response()->json(['success' => true, 'message' => 'Success give permission', 'data' => $data]);
@@ -133,16 +215,14 @@ class UserController extends Controller
 
     }
 
-    public function revokePermission(Request $request) {
+    public function revokePermissions(Request $request) {
 
         try {
-            $user_id    = Auth::user()['user']->id;
-            $user       = User::find($user_id);
 
-            $user->revokePermissionTo($request->get('permission'));
+            Auth::user()->revokePermissionTo($request->get('permission'));
 
             /** up to date roles */
-            $data = UserController::userHasRole();
+            $data = UserController::hasRole();
             // 
 
             return response()->json(['success' => true, 'message' => 'Success revoke permission', 'data' => $data]);
@@ -154,13 +234,11 @@ class UserController extends Controller
 
     }
 
-    public static function userHasRole() {
-        
-        $user_id                = Auth::user()['user']->id;
-        $user                   = User::where('id', $user_id)->first();
-        $data['user']           = $user;
-        $data['roles']          = $user->getRoleNames();
-        $data['permission']     = $user->getPermissionNames();
+    public static function hasRole() {
+
+        $data['user']           = Auth::user();
+        $data['roles']          = Auth::user()->getRoleNames();
+        $data['permission']     = Auth::user()->getPermissionNames();
 
         return $data;
     }
