@@ -9,6 +9,15 @@ use App\Models\Ebiz;
 use App\Http\Transformers\EbizTransformer;
 use App\Http\Transformers\IlluminatePaginatorAdapter;
 
+ /**
+ * @OA\Get(
+ *     path="/ebiz",
+ *     summary="Get all data",
+ *     tags={"Fractal"},
+ *     @OA\Response(response="200", description="OK"),
+ *     security={{ "apiAuth": {} }}
+ * )
+ */
 
 class EbizController extends Controller
 {
